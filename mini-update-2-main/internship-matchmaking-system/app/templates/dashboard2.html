@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <!-- Link to Bootstrap Icons for Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Link to External CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5 p-5 bg-light shadow-lg rounded">
+    <!-- Header Section -->
+    <h1 class="text-center mb-4" style="color: #2c3e50; font-weight: bold;">Admin Dashboard</h1>
+    
+    <!-- Buttons Section -->
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ url_for('main.create_opportunity') }}" 
+           class="btn btn-outline-primary px-4 py-2"
+           style="font-size: 18px; font-weight: bold; border-radius: 8px;">
+            <i class="bi bi-plus-circle"></i> Create New Opportunity
+        </a>
+    </div>
+
+    <!-- Opportunities Section -->
+    <div class="opportunities-section bg-white p-4 rounded shadow-sm">
+        <h2 class="mb-3" style="color: #34495e; font-weight: bold;">All Opportunities</h2>
+        <ul class="list-group">
+            {% for opportunity in opportunities %}
+                <li class="list-group-item d-flex justify-content-between align-items-center"
+                    style="border: none; padding: 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 10px;">
+                    <div>
+                        <h5 style="color: #2c3e50; font-weight: bold;">{{ opportunity.title }}</h5>
+                        <p style="color: #7f8c8d;">{{ opportunity.description }}</p>
+                    </div>
+                    <div>
+                        <a href="#" 
+                           class="btn btn-outline-primary btn-sm me-2" 
+                           style="font-size: 14px; font-weight: bold;">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a href="#" 
+                           class="btn btn-outline-danger btn-sm" 
+                           style="font-size: 14px; font-weight: bold;">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="list-group-item text-center text-muted" 
+                    style="background-color: #f8f9fa; padding: 20px; font-size: 16px;">
+                    No opportunities available.
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Logout Button at the End -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('main.logout') }}" 
+           class="btn btn-danger px-4 py-2"
+           style="font-size: 18px; font-weight: bold; border-radius: 8px;">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
